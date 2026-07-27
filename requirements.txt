@@ -1,0 +1,7 @@
+groq
+python-telegram-bot
+Flask
+python-dotenv
+requests
+beautifulsoup4
+ddgs
