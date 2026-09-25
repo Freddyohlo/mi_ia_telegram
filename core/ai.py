@@ -1,6 +1,12 @@
 from groq import Groq
 from config import GROQ_API_KEY, MODEL
 
+if not GROQ_API_KEY:
+    raise RuntimeError(
+        "Falta GROQ_API_KEY. Configúrala en el archivo .env "
+        "(puedes copiar .env.example como plantilla)."
+    )
+
 cliente = Groq(api_key=GROQ_API_KEY)
 
 
