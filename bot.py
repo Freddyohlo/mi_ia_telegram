@@ -6,6 +6,7 @@ from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 from agente import responder_agente
+from config import TELEGRAM_TOKEN
 
 from memoria.memoria import guardar
 from memoria.memoria import leer
@@ -31,9 +32,6 @@ def iniciar_web():
 # ----------------------------
 # Telegram
 # ----------------------------
-
-TOKEN = "8768492730:AAFvUzDkPI7rNVCCle1Pssfo1JdNkNpweDw"
-
 
 async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -70,7 +68,13 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def iniciar_bot():
 
-    app = Application.builder().token(TOKEN).build()
+    if not TELEGRAM_TOKEN:
+        raise RuntimeError(
+            "Falta TELEGRAM_TOKEN. Configúralo en el archivo .env "
+            "(puedes copiar .env.example como plantilla)."
+        )
+
+    app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     app.add_handler(
         MessageHandler(
